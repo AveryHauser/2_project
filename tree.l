@@ -2,7 +2,8 @@
 
 // Group members: Caleb McCoy and Avery Hauser
 // File: tree.l
-// Purpose: 
+// Purpose: break down contents of C & C++ files to unique tokens.
+// This is in preporation for static analyzing of our tree program.
 
 
 
@@ -13,6 +14,9 @@
 // Need to add a Makefile
 // Add newline character to whitespace catch when done
 
+
+
+// declarations
 
 #define TKBUILD 1
 #define TKNAME 2 
