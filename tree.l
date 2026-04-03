@@ -2,16 +2,12 @@
 
 // Group members: Caleb McCoy and Avery Hauser
 // File: tree.l
-// Purpose: break down contents of C & C++ files to unique tokens.
-// This is in preporation for static analyzing of our tree program.
-
-
-
+// Purpose: Tokenize tree language ints, string, key words and pass them through to our static analyzer.
+// This is in preporation for static analyzing of our tree program using BISON.
+// We print out any symobles since there is no need to tokenize.
 
 // ISSUES TO FIX:
 // Currently keeps newlines in ouput for readability, add newline character to whitespace catch when done
-
-
 
 // declarations
 
@@ -28,8 +24,6 @@
 #define TKPRINT 10
 
 #define TKSYM 11
-
-
 
 #define TKUNMATCHED 255
 
