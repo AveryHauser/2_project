@@ -6,9 +6,6 @@
 // This is in preporation for static analyzing of our tree program using BISON.
 // We print out any symobles since there is no need to tokenize.
 
-// ISSUES TO FIX:
-// Currently keeps newlines in ouput for readability, add newline character to whitespace catch when done
-
 // declarations
 
 #define TKBUILD 1
@@ -36,7 +33,6 @@ C[a-zA-Z]
 O[!=/<>*%-]
 
 %%
-
 
 "buildnode"(" "|\t|\r|\f)*                            {return TKBUILD;}
 "name"(" "|\t|\r|\f)*                                 {return TKNAME;}
