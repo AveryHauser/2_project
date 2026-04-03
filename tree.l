@@ -50,10 +50,10 @@ O[!=/<>*%-]
 "isachildof"(" "|\t|\r|\f)*                           {return TKCHILD;}
 "for"(" "|\n|\t|\r|\f)+                               {return TKFOR;}
 "in"(" "|\n|\t|\r|\f)+                                {return TKIN;}
-{D}*({C}|"_")+({C}|{D}|"_")*(" "|\n|\t|\r|\f)+        {return TKLOOPVAR;}
+({C}|"_")+({C}|{D}|"_")*(" "|\n|\t|\r|\f)+            {return TKLOOPVAR;}
 "["{D}*":"{D}*"]"                                     {return TKRANGE;}
 "print"                                               {return TKPRINT;}
-{D}*({C}|"_")+({C}|{D}|"_")*                          {return TKVAR;}
+({C}|"_")+({C}|{D}|"_")*                              {return TKVAR;}
 
 
 
@@ -67,7 +67,7 @@ O[!=/<>*%-]
 ")"                                                   {return ')';} 
 
 
-(" "|\t|\r|\f)+            ; 
+(" "|\t|\r|\f)+                                       ; 
 .                                                     {return TKUNMATCHED;}
 
 
