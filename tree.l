@@ -7,10 +7,9 @@
 
 
 
-// ISSUES TO FIX:
-// Return symbols themselves instead of ASCII values
 
-// Add newline character to whitespace catch when done
+// ISSUES TO FIX:
+// Currently keeps newlines in ouput for readability, add newline character to whitespace catch when done
 
 
 
@@ -28,10 +27,13 @@
 #define TKRANGE 10
 #define TKPRINT 11
 #define TKVAR 12
+#define TKSYM 13
 
 
 
 #define TKUNMATCHED 255
+
+char *yylval;
 
 %}
 
@@ -55,18 +57,7 @@ O[!=/<>*%-]
 "print"                                               {return TKPRINT;}
 ({C}|"_")+({C}|{D}|"_")*                              {return TKVAR;}
 
-
-
-"="                                                   {return '=';}
-"+"                                                   {return '+';}
-";"                                                   {return ';';} 
-"{"                                                   {return '{';}
-"}"                                                   {return '}';} 
-","                                                   {return ',';} 
-"("                                                   {return '(';}
-")"                                                   {return ')';} 
-
-
+("="|"+"|";"|"{"|"}"|","|"("|")")                     { yylval = strdup(yytext); return TKSYM; }
 (" "|\t|\r|\f)+                                       ; 
 .                                                     {return TKUNMATCHED;}
 
@@ -90,7 +81,15 @@ int main()
 
 	while(token)
 	{
-		fprintf(yyout, "%d ", token);		
+        if (token == TKSYM)
+        {
+            fprintf(yyout, "%s ", yylval);
+        }
+        else
+        {
+            fprintf(yyout, "%d ", token);	
+        }	
+
 		token = yylex();
 	}
 
