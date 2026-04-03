@@ -50,7 +50,7 @@ O[!=/<>*%-]
 ({C}|"_")+({C}|{D}|"_")*                              {yylval = strdup(yytext); return TKVAR;}
 
 ("="|"+"|";"|"{"|"}"|","|"("|")"|":"|"["|"]")         { yylval = strdup(yytext); return TKSYM; }
-(" "|\t|\r|\f)+                                       ; 
+(" "|\n|\t|\r|\f)+                                       ; 
 .                                                     {return TKUNMATCHED;}
 
 
