@@ -11,7 +11,6 @@
 // Buildnode sometimes coutning as a variable (Line 6 of input)
 // Return symbols themselves instead of ASCII values
 
-// Need to add a Makefile
 // Add newline character to whitespace catch when done
 
 
