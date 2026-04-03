@@ -22,12 +22,12 @@
 #define TKDIGT 5
 #define TKCHILD 6
 #define TKFOR 7
-#define TKLOOPVAR 8
+#define TKVAR 8
 #define TKIN 9
-#define TKRANGE 10
-#define TKPRINT 11
-#define TKVAR 12
-#define TKSYM 13
+
+#define TKPRINT 10
+
+#define TKSYM 11
 
 
 
@@ -47,17 +47,15 @@ O[!=/<>*%-]
 "buildnode"(" "|\t|\r|\f)*                            {return TKBUILD;}
 "name"(" "|\t|\r|\f)*                                 {return TKNAME;}
 "weight"(" "|\t|\r|\f)*                               {return TKWEIGHT;}
-\".*\"		                                          {return TKSTR;}
-{D}*                                                  {return TKDIGT;}
+\".*\"		                                          {yylval = strdup(yytext); return TKSTR;}
+{D}+                                                  {yylval = strdup(yytext); return TKDIGT;}
 "isachildof"(" "|\t|\r|\f)*                           {return TKCHILD;}
 "for"(" "|\n|\t|\r|\f)+                               {return TKFOR;}
 "in"(" "|\n|\t|\r|\f)+                                {return TKIN;}
-({C}|"_")+({C}|{D}|"_")*(" "|\n|\t|\r|\f)+            {return TKLOOPVAR;}
-"["{D}*":"{D}*"]"                                     {return TKRANGE;}
 "print"                                               {return TKPRINT;}
-({C}|"_")+({C}|{D}|"_")*                              {return TKVAR;}
+({C}|"_")+({C}|{D}|"_")*                              {yylval = strdup(yytext); return TKVAR;}
 
-("="|"+"|";"|"{"|"}"|","|"("|")")                     { yylval = strdup(yytext); return TKSYM; }
+("="|"+"|";"|"{"|"}"|","|"("|")"|":"|"["|"]")         { yylval = strdup(yytext); return TKSYM; }
 (" "|\t|\r|\f)+                                       ; 
 .                                                     {return TKUNMATCHED;}
 
@@ -80,8 +78,7 @@ int main()
 	token = yylex();
 
 	while(token)
-	{
-        if (token == TKSYM)
+	{   if (token == TKSYM)
         {
             fprintf(yyout, "%s ", yylval);
         }
