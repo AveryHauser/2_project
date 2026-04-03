@@ -8,7 +8,6 @@
 
 
 // ISSUES TO FIX:
-// Buildnode sometimes coutning as a variable (Line 6 of input)
 // Return symbols themselves instead of ASCII values
 
 // Add newline character to whitespace catch when done
@@ -43,12 +42,12 @@ O[!=/<>*%-]
 %%
 
 
-"buildnode"                                           {return TKBUILD;}
-"name"                                                {return TKNAME;}
-"weight"                                              {return TKWEIGHT;}
+"buildnode"(" "|\t|\r|\f)*                            {return TKBUILD;}
+"name"(" "|\t|\r|\f)*                                 {return TKNAME;}
+"weight"(" "|\t|\r|\f)*                               {return TKWEIGHT;}
 \".*\"		                                          {return TKSTR;}
 {D}*                                                  {return TKDIGT;}
-"isachildof"                                          {return TKCHILD;}
+"isachildof"(" "|\t|\r|\f)*                           {return TKCHILD;}
 "for"(" "|\n|\t|\r|\f)+                               {return TKFOR;}
 "in"(" "|\n|\t|\r|\f)+                                {return TKIN;}
 {D}*({C}|"_")+({C}|{D}|"_")*(" "|\n|\t|\r|\f)+        {return TKLOOPVAR;}
